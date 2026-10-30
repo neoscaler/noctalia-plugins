@@ -39,6 +39,8 @@ the label and icon show the type the firmware reports after the write.
 | `Standard` | Normal | `battery-charging` |
 | `Fast` | Fast | `bolt` |
 
+![The three states of the tile: Eco, Normal, Fast](docs/charge-modes.webp)
+
 Conservation and fast charge are mutually exclusive in the firmware: enabling one switches the other off. The kernel
 sequences those writes, so cycling the tile is always safe.
 
