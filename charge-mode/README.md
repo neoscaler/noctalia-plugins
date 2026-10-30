@@ -2,7 +2,7 @@
 
 **Charge Mode** is a Control Center shortcut plugin for [Noctalia](https://docs.noctalia.dev) (v5) that cycles the
 battery charge type through the kernel's standard `charge_types` power-supply attribute:
-**Conservation** (`Long_Life`) → **Normal** (`Standard`) → **Fast charge** (`Fast`).
+**Care** (`Long_Life`) → **Normal** (`Standard`) → **Fast charge** (`Fast`).
 
 The kernel exposes these as one mutually exclusive charge type, so the tile cycles all three instead of pretending
 they are independent switches. It covers Lenovo Legion and IdeaPad laptops, and any other laptop whose `ideapad-laptop`
@@ -12,7 +12,7 @@ It replaces the older `conservation_mode` sysfs attribute most tutorials and too
 that attribute deprecated (writing it logs `conservation_mode attribute has been deprecated, see charge_types`) and
 `charge_types` covers conservation *and* fast charge through one interface.
 
-![The charge tile (Eco) next to another Control Center shortcut](docs/control-center.webp)
+![The charge tile (Care) next to another Control Center shortcut](docs/control-center.webp)
 
 ## Plugin
 
@@ -35,11 +35,11 @@ the label and icon show the type the firmware reports after the write.
 
 | Charge type | Label | Icon |
 | --- | --- | --- |
-| `Long_Life` | Eco (caps charging below 100%) | `battery-eco` |
+| `Long_Life` | Care (caps charging below 100%) | `shield-heart` |
 | `Standard` | Normal | `battery-charging` |
 | `Fast` | Fast | `bolt` |
 
-![The three states of the tile: Eco, Normal, Fast](docs/charge-modes.webp)
+![The three states of the tile: Care, Normal, Fast](docs/charge-modes.webp)
 
 Conservation and fast charge are mutually exclusive in the firmware: enabling one switches the other off. The kernel
 sequences those writes, so cycling the tile is always safe.

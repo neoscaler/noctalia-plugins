@@ -19,7 +19,7 @@ local LABEL = {
 }
 
 local ICON = {
-  Long_Life = "battery-eco",
+  Long_Life = "shield-heart",
   Standard = "battery-charging",
   Fast = "bolt",
 }
