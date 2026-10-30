@@ -20,8 +20,8 @@ local LABEL = {
 
 local ICON = {
   Long_Life = "shield-heart",
-  Standard = "battery-charging",
-  Fast = "bolt",
+  Standard = "battery",
+  Fast = "battery-charging",
 }
 
 local function attrPath()
