@@ -35,9 +35,9 @@ the label and icon show the type the firmware reports after the write.
 
 | Charge type | Label | Icon |
 | --- | --- | --- |
-| `Long_Life` | Care (caps charging below 100%) | `battery-eco` |
+| `Long_Life` | Care (caps charging below 100%) | `shield-heart` |
 | `Standard` | Normal | `battery` |
-| `Fast` | Fast | `battery-charging` |
+| `Fast` | Fast | `bolt` |
 
 ![The three states of the tile: Care, Normal, Fast](docs/charge-modes.webp)
 

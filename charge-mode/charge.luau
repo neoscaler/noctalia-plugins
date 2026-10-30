@@ -19,9 +19,9 @@ local LABEL = {
 }
 
 local ICON = {
-  Long_Life = "battery-eco",
+  Long_Life = "shield-heart",
   Standard = "battery",
-  Fast = "battery-charging",
+  Fast = "bolt",
 }
 
 local function attrPath()
