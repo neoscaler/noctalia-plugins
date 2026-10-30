@@ -81,6 +81,13 @@ local function fail(message)
   noctalia.notifyError(noctalia.tr("title"), message)
 end
 
+-- pkexec cannot ask for credentials without a polkit agent. Only that case
+-- falls back to a terminal; a dismissed or denied prompt must not, because the
+-- user just said no.
+local function noPolkitAgent(result)
+  return string.find(string.lower(result.stderr or ""), "agent", 1, true) ~= nil
+end
+
 local function setupThenWrite(path, target, previous)
   local dir = noctalia.pluginDir()
   if not dir then
@@ -90,11 +97,21 @@ local function setupThenWrite(path, target, previous)
   end
   local script = dir .. "/setup.sh"
 
+  local function viaTerminal()
+    if not noctalia.runInTerminal("sudo /bin/sh " .. shQuote(script)) then
+      return false
+    end
+    render(previous)
+    noctalia.notify(noctalia.tr("title"), noctalia.tr("notify.setup_running"))
+    return true
+  end
+  local function viaPkexecFailed(result)
+    render(previous)
+    fail(noctalia.tr("error.setup_failed", { error = noctalia.string.trim(result.stderr or "") }))
+  end
+
   if not noctalia.commandExists("pkexec") then
-    if noctalia.runInTerminal("sudo /bin/sh " .. shQuote(script)) then
-      render(previous)
-      noctalia.notify(noctalia.tr("title"), noctalia.tr("notify.setup_running"))
-    else
+    if not viaTerminal() then
       render(previous)
       fail(noctalia.tr("error.setup_manual"))
     end
@@ -103,8 +120,9 @@ local function setupThenWrite(path, target, previous)
 
   noctalia.runAsync({ "pkexec", "/bin/sh", script }, function(result)
     if result.exitCode ~= 0 then
-      render(previous)
-      fail(noctalia.tr("error.setup_failed", { error = noctalia.string.trim(result.stderr or "") }))
+      if not (noPolkitAgent(result) and viaTerminal()) then
+        viaPkexecFailed(result)
+      end
       return
     end
     if noctalia.writeFile(path, target) then

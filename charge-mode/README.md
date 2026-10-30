@@ -50,8 +50,9 @@ Writing `charge_types` needs root. The first click that cannot write runs `setup
 `/etc/udev/rules.d/99-charge-mode.rules`, which hands the attribute to your user via `chown`, and applies it
 immediately — no logout, no reboot. Every later click writes directly.
 
-The setup prompt appears once. If no polkit agent is running, the plugin falls back to a terminal with `sudo`
-(Noctalia can supply an agent itself: set `shell.polkit_agent = true`).
+The setup prompt appears once. If `pkexec` cannot show a prompt because no polkit agent is running, the plugin falls
+back to a terminal with `sudo` (Noctalia can supply an agent itself: set `shell.polkit_agent = true`). Cancelling the
+prompt counts as a no: no terminal opens, only the error notification appears.
 
 To do it by hand, or on a system with an immutable `/etc` (NixOS), install the rule yourself:
 

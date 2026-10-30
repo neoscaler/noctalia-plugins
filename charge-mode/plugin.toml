@@ -1,6 +1,6 @@
 id          = "neoscaler/charge-mode"
 name        = "Charge Mode"
-version     = "1.0.5"
+version     = "1.0.6"
 plugin_api  = 43
 author      = "neoscaler"
 license     = "MIT"
