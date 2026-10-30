@@ -8,6 +8,12 @@ The kernel exposes these as one mutually exclusive charge type, so the tile cycl
 they are independent switches. It covers Lenovo Legion and IdeaPad laptops, and any other laptop whose `ideapad-laptop`
 or vendor driver publishes `charge_types`.
 
+It replaces the older `conservation_mode` sysfs attribute most tutorials and tools still write to: the kernel marks
+that attribute deprecated (writing it logs `conservation_mode attribute has been deprecated, see charge_types`) and
+`charge_types` covers conservation *and* fast charge through one interface.
+
+![The charge tile (Eco) next to another Control Center shortcut](docs/control-center.webp)
+
 ## Plugin
 
 | Field | Value |
@@ -17,8 +23,9 @@ or vendor driver publishes `charge_types`.
 
 ## Requirements
 
-- Kernel with the `charge_types` power-supply attribute (mainline 6.15+). Missing attribute: the tile stays disabled
-  and shows `N/A`.
+- Linux kernel **6.19 or newer** for the three states: `charge_types` exists since 6.17, but the `Fast` value (rapid
+  charge) was only added to `ideapad-laptop` in 6.19. Kernels before 6.17 expose only the deprecated
+  `conservation_mode` attribute, so the tile stays disabled and shows `N/A`.
 - The `pkexec`, `sudo`, `sh`, `chown` and `udevadm` commands for the one-time setup.
 
 ## Usage
@@ -28,9 +35,9 @@ the label and icon show the type the firmware reports after the write.
 
 | Charge type | Label | Icon |
 | --- | --- | --- |
-| `Long_Life` | Conservation (caps charging below 100%) | `battery-eco` |
+| `Long_Life` | Eco (caps charging below 100%) | `battery-eco` |
 | `Standard` | Normal | `battery-charging` |
-| `Fast` | Fast charge (rapid charge) | `bolt` |
+| `Fast` | Fast | `bolt` |
 
 Conservation and fast charge are mutually exclusive in the firmware: enabling one switches the other off. The kernel
 sequences those writes, so cycling the tile is always safe.

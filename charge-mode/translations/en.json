@@ -1,9 +1,9 @@
 {
   "title": "Charge mode",
   "label": {
-    "long_life": "Conservation",
+    "long_life": "Eco",
     "standard": "Normal",
-    "fast": "Fast charge",
+    "fast": "Fast",
     "unavailable": "Charge mode N/A"
   },
   "notify": {
