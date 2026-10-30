@@ -35,7 +35,7 @@ the label and icon show the type the firmware reports after the write.
 
 | Charge type | Label | Icon |
 | --- | --- | --- |
-| `Long_Life` | Care (caps charging below 100%) | `shield-heart` |
+| `Long_Life` | Care (caps charging below 100%) | `battery-eco` |
 | `Standard` | Normal | `battery` |
 | `Fast` | Fast | `battery-charging` |
 

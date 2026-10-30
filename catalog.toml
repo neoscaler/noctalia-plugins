@@ -1,7 +1,7 @@
 [[plugin]]
 id           = "neoscaler/charge-mode"
 name         = "Charge Mode"
-version      = "1.0.3"
+version      = "1.0.4"
 author       = "neoscaler"
 license      = "MIT"
 icon         = "battery-charging"
