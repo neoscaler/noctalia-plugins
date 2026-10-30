@@ -1,0 +1,5 @@
+{
+  "languageMode": "nonstrict",
+  "lint": { "strict": false },
+  "types": { "definitionFiles": ["noctalia.d.luau"] }
+}
