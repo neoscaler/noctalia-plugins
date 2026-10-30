@@ -119,11 +119,12 @@ end
 
 function onClick()
   local path = attrPath()
-  local active = path and readActive(path)
-  if not active then
+  if not path then
     render(nil)
     return
   end
+  -- A transient read failure still lets the tile cycle from Normal.
+  local active = readActive(path) or "Standard"
 
   local target = NEXT[active] or "Standard"
   if noctalia.writeFile(path, target) then
