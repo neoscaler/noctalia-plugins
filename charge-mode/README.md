@@ -15,6 +15,12 @@ or vendor driver publishes `charge_types`.
 | ID | `neoscaler/charge-mode` |
 | Entries | Shortcut: `charge` |
 
+## Requirements
+
+- Kernel with the `charge_types` power-supply attribute (mainline 6.15+). Missing attribute: the tile stays disabled
+  and shows `N/A`.
+- The `pkexec`, `sudo`, `sh`, `chown` and `udevadm` commands for the one-time setup.
+
 ## Usage
 
 Add the `charge` shortcut under Settings → Control Center shortcuts. Each click advances to the next charge type;
@@ -28,12 +34,6 @@ the label and icon show the type the firmware reports after the write.
 
 Conservation and fast charge are mutually exclusive in the firmware: enabling one switches the other off. The kernel
 sequences those writes, so cycling the tile is always safe.
-
-## Requirements
-
-- Kernel with the `charge_types` power-supply attribute (mainline 6.15+). Missing attribute: the tile stays disabled
-  and shows `N/A`.
-- The `pkexec`, `sudo`, `sh`, `chown` and `udevadm` commands for the one-time setup.
 
 ## One-time setup, then no prompts
 
@@ -51,6 +51,7 @@ echo 'ACTION=="add|change", SUBSYSTEM=="power_supply", ATTR{type}=="Battery", TE
   | sudo tee /etc/udev/rules.d/99-charge-mode.rules
 sudo udevadm control --reload-rules
 sudo udevadm trigger --action=change --subsystem-match=power_supply
+sudo udevadm settle
 ```
 
 ### NixOS
@@ -65,8 +66,11 @@ sudo udevadm trigger --action=change --subsystem-match=power_supply
 
 ## Notes
 
-- The plugin only touches `/sys/class/power_supply/*/charge_types`; it never writes outside sysfs and never runs a
-  command as your user's own account.
+- The plugin only touches `/sys/class/power_supply/*/charge_types`. It writes nothing outside sysfs. The only process it
+  ever spawns is `setup.sh` through `pkexec` (or `sudo` in a terminal when no polkit agent answers); normal clicks
+  write the attribute directly and spawn nothing.
+- The udev rule itself runs `/bin/chown <you> /sys%p/charge_types` on every battery add/change event, so the permission
+  survives reboots.
 - The battery is discovered by scanning `/sys/class/power_supply`, so `BAT0`, `BAT1` and friends all work.
 - Whether `Fast` is accepted can depend on firmware state (charger attached, battery temperature, state of charge).
   The plugin re-reads the attribute after every write and shows the real value.
