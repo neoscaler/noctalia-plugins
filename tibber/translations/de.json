@@ -12,7 +12,7 @@
     },
     "price_unit": {
       "label": "Preiseinheit",
-      "description": "„Klein" zeigt z. B. 23 ct/kWh (EUR) oder 230 öre/kWh (SEK), „groß" zeigt z. B. 0,23 EUR/kWh.",
+      "description": "„Klein“ zeigt z. B. 23 ct/kWh (EUR) oder 230 öre/kWh (SEK), „groß“ zeigt z. B. 0,23 EUR/kWh.",
       "options": {
         "minor": "Klein (ct, öre, øre)",
         "major": "Groß (EUR, SEK, NOK)"
@@ -54,6 +54,10 @@
     "today": "Heute",
     "tomorrow": "Morgen",
     "hover_hint": "Balken für Details überfahren",
+    "view_all": "Heute + morgen",
+    "view_today": "Nur heute",
+    "view_tomorrow": "Nur morgen",
+    "no_tomorrow": "Für morgen sind noch keine Preise veröffentlicht",
     "slot_info": "{day} {from}–{to} Uhr · {price} · {level}",
     "minmax": "↓ {min} ({minTime}) · ↑ {max} ({maxTime})",
     "bar_tooltip": "{price} · {from}–{to} Uhr",
