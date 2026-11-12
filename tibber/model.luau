@@ -36,6 +36,11 @@ local function parseISOms(s)
   if not y then
     return nil
   end
+  local yn, mon, dn = tonumber(y), tonumber(mo), tonumber(d)
+  local hn, mn, sn = tonumber(h), tonumber(mi), tonumber(sec)
+  if not yn or not mon or not dn or not hn or not mn or not sn then
+    return nil
+  end
   local off = 0
   local sign, oh, om = string.match(s, "([%+%-])(%d%d):?(%d%d)%s*$")
   if sign then
@@ -44,8 +49,8 @@ local function parseISOms(s)
       off = -off
     end
   end
-  local days = daysFromCivil(tonumber(y), tonumber(mo), tonumber(d))
-  local secs = days * 86400 + tonumber(h) * 3600 + tonumber(mi) * 60 + tonumber(sec) - off
+  local days = daysFromCivil(yn, mon, dn)
+  local secs = days * 86400 + hn * 3600 + mn * 60 + sn - off
   return secs * 1000
 end
 

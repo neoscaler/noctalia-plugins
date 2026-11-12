@@ -306,7 +306,8 @@ function onSlotHover(state, key)
 end
 
 function onView(index, _text)
-  view = VIEWS[tonumber(index) + 1] or "all"
+  local i = tonumber(index) or 0
+  view = VIEWS[i + 1] or "all"
   hovered = nil
   render()
 end

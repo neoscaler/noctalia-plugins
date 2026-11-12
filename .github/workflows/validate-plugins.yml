@@ -26,4 +26,4 @@ jobs:
         run: |
           npm install -g luau-lsp
           curl -sL -o noctalia.d.luau https://raw.githubusercontent.com/noctalia-dev/official-plugins/main/noctalia.d.luau
-          luau-lsp analyze charge-mode tibber
+          luau-lsp analyze --definitions=noctalia.d.luau charge-mode tibber
