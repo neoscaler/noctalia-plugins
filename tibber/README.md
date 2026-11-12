@@ -10,7 +10,7 @@ It ships four entries driven by one headless service:
 | Entry | What it does |
 | --- | --- |
 | Bar widget `neoscaler/tibber:bar` | Current price in the bar, colored by Tibber's price level. Click opens the panel. |
-| Panel `neoscaler/tibber:panel` | Current price, stat tiles for the **cheapest** and **most expensive time of the day** (plus average and cheapest upcoming slot), and a bar chart of today's and tomorrow's prices. Hover a bar for its time, price and level. |
+| Panel `neoscaler/tibber:panel` | Current price, stat tiles for the **cheapest** and **most expensive time of the day** (plus average and cheapest upcoming slot), and a bar chart with price axis, day filter and hover details. |
 | Desktop widget `neoscaler/tibber:desktop` | Compact price tile with a sparkline and the min/max of the day. Add it from the desktop-widgets editor. |
 | Service `neoscaler/tibber:prices` | Polls the API and publishes the parsed model to the plugin's shared state. |
 
