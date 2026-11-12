@@ -203,6 +203,32 @@ local function hourTicks(prices)
   return out
 end
 
+-- Y gridline values at 1/2/5 x 10^n in the displayed unit, covering lo..hi.
+-- Values are in major units; labels are already formatted for display.
+local function yTicks(lo, hi, minor)
+  local k = minor and 100 or 1
+  local a, b = lo * k, hi * k
+  local raw = (b - a) / 4
+  local mag = 10 ^ math.floor(math.log(raw, 10))
+  local f = raw / mag
+  local best = 1
+  for _, c in ipairs({ 1, 2, 5, 10 }) do
+    if math.abs(math.log(f / c, 10)) < math.abs(math.log(f / best, 10)) then
+      best = c
+    end
+  end
+  local step = best * mag
+  local dec = step >= 1 and 0 or (step >= 0.1 and 1 or 2)
+  local out = {}
+  local i = math.floor(a / step + 1e-9)
+  local last = math.ceil(b / step - 1e-9)
+  while i <= last do
+    table.insert(out, { v = i * step / k, label = string.format("%." .. dec .. "f", i * step) })
+    i = i + 1
+  end
+  return out
+end
+
 -- Prices normalized to 0..1 for ui.graph.
 local function normValues(prices)
   local r = range(prices)
@@ -273,6 +299,7 @@ return {
   stats = stats,
   range = range,
   hourTicks = hourTicks,
+  yTicks = yTicks,
   normValues = normValues,
   fmtPrice = fmtPrice,
   unitShort = unitShort,
