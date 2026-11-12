@@ -1,0 +1,40 @@
+name: validate-plugins
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate manifests, translations, catalog, thumbnails
+        run: python3 .github/scripts/validate_plugins.py
+
+      - name: Luau analyze (luau-lsp)
+        run: |
+          curl -sL -o noctalia.d.luau https://raw.githubusercontent.com/noctalia-dev/official-plugins/main/noctalia.d.luau
+          curl -sL -o luau-lsp.zip https://github.com/JohnnyMorganz/luau-lsp/releases/latest/download/luau-lsp-linux-x86_64.zip
+          unzip -q -o luau-lsp.zip
+          chmod +x luau-lsp
+          # The analyze CLI does not support the LSP-only types.definitionFiles key
+          # (it fails on unknown .luaurc keys), so swap in a minimal config and
+          # pass the definitions file explicitly instead. The repo .luaurc is
+          # restored afterwards and stays authoritative for editor integrations.
+          cp .luaurc /tmp/luaurc.bak
+          printf '{\n  "languageMode": "nonstrict",\n  "lint": { "FunctionUnused": false }\n}\n' > .luaurc
+          ./luau-lsp analyze --definitions=noctalia.d.luau charge-mode tibber
+          rc=$?
+          cp /tmp/luaurc.bak .luaurc
+          exit $rc
