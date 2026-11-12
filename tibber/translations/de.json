@@ -1,0 +1,68 @@
+{
+  "settings": {
+    "refresh_minutes": {
+      "label": "Aktualisierungsintervall",
+      "description": "Wie oft die Preise von der Tibber-API neu geladen werden. Fehlgeschlagene Anfragen werden nach 60 Sekunden erneut versucht.",
+      "options": {
+        "5": "5 Minuten",
+        "15": "15 Minuten",
+        "30": "30 Minuten",
+        "60": "60 Minuten"
+      }
+    },
+    "price_unit": {
+      "label": "Preiseinheit",
+      "description": "„Klein" zeigt z. B. 23 ct/kWh (EUR) oder 230 öre/kWh (SEK), „groß" zeigt z. B. 0,23 EUR/kWh.",
+      "options": {
+        "minor": "Klein (ct, öre, øre)",
+        "major": "Groß (EUR, SEK, NOK)"
+      }
+    },
+    "show_unit": {
+      "label": "Einheit anzeigen",
+      "description": "Hängt die Einheit (ct, EUR, ...) an Preise in Bar, Panel und Desktop-Widget an."
+    },
+    "glyph": {
+      "label": "Balken-Symbol",
+      "description": "Symbol neben dem aktuellen Preis im Balken-Widget."
+    },
+    "color": {
+      "label": "Diagrammfarbe",
+      "description": "Farbe der Preislinie im Desktop-Widget."
+    },
+    "show_chart": {
+      "label": "Preisdiagramm anzeigen",
+      "description": "Zeigt eine Sparksline der Tagespreise im Desktop-Widget."
+    },
+    "show_minmax": {
+      "label": "Günstigste / teuerste Zeit anzeigen",
+      "description": "Zeigt die günstigste und teuerste Zeit des Tages im Desktop-Widget."
+    }
+  },
+  "ui": {
+    "title": "Tibber-Preise",
+    "loading": "Preise werden geladen…",
+    "error": "Preise konnten nicht geladen werden: {error}",
+    "updated": "aktualisiert {time}",
+    "demo": "Demo-Daten",
+    "refresh": "Jetzt aktualisieren",
+    "close": "Schließen",
+    "cheapest_today": "Günstigste heute",
+    "priciest_today": "Teuerste heute",
+    "average_today": "Durchschnitt heute",
+    "cheapest_next": "Nächste günstige Zeit",
+    "today": "Heute",
+    "tomorrow": "Morgen",
+    "hover_hint": "Balken für Details überfahren",
+    "slot_info": "{day} {from}–{to} Uhr · {price} · {level}",
+    "minmax": "↓ {min} ({minTime}) · ↑ {max} ({maxTime})",
+    "bar_tooltip": "{price} · {from}–{to} Uhr",
+    "level": {
+      "VERY_CHEAP": "sehr günstig",
+      "CHEAP": "günstig",
+      "NORMAL": "normal",
+      "EXPENSIVE": "teuer",
+      "VERY_EXPENSIVE": "sehr teuer"
+    }
+  }
+}
