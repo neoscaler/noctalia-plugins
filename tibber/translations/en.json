@@ -1,0 +1,68 @@
+{
+  "settings": {
+    "refresh_minutes": {
+      "label": "Refresh interval",
+      "description": "How often prices are refetched from the Tibber API. Failed requests are retried after 60 seconds.",
+      "options": {
+        "5": "5 minutes",
+        "15": "15 minutes",
+        "30": "30 minutes",
+        "60": "60 minutes"
+      }
+    },
+    "price_unit": {
+      "label": "Price unit",
+      "description": "Minor shows e.g. 23 ct/kWh (EUR) or 230 öre/kWh (SEK), major shows e.g. 0.23 EUR/kWh.",
+      "options": {
+        "minor": "Minor (ct, öre, øre)",
+        "major": "Major (EUR, SEK, NOK)"
+      }
+    },
+    "show_unit": {
+      "label": "Show unit",
+      "description": "Append the unit (ct, EUR, ...) to prices in the bar, panel and desktop widget."
+    },
+    "glyph": {
+      "label": "Bar glyph",
+      "description": "Glyph shown next to the current price in the bar widget."
+    },
+    "color": {
+      "label": "Chart color",
+      "description": "Color of the sparkline in the desktop widget."
+    },
+    "show_chart": {
+      "label": "Show price chart",
+      "description": "Show a sparkline of the day's prices in the desktop widget."
+    },
+    "show_minmax": {
+      "label": "Show cheapest / most expensive",
+      "description": "Show the cheapest and most expensive time of the day in the desktop widget."
+    }
+  },
+  "ui": {
+    "title": "Tibber prices",
+    "loading": "Loading prices…",
+    "error": "Could not load prices: {error}",
+    "updated": "updated {time}",
+    "demo": "Demo data",
+    "refresh": "Refresh now",
+    "close": "Close",
+    "cheapest_today": "Cheapest today",
+    "priciest_today": "Most expensive today",
+    "average_today": "Average today",
+    "cheapest_next": "Cheapest upcoming",
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "hover_hint": "Hover the bars for slot details",
+    "slot_info": "{day} {from}–{to} · {price} · {level}",
+    "minmax": "↓ {min} ({minTime}) · ↑ {max} ({maxTime})",
+    "bar_tooltip": "{price} · {from}–{to}",
+    "level": {
+      "VERY_CHEAP": "very cheap",
+      "CHEAP": "cheap",
+      "NORMAL": "normal",
+      "EXPENSIVE": "expensive",
+      "VERY_EXPENSIVE": "very expensive"
+    }
+  }
+}
