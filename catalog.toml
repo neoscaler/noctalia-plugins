@@ -10,3 +10,16 @@ deprecated   = false
 plugin_api   = 43
 tags         = ["hardware", "shortcut", "system", "nixos"]
 dependencies = ["pkexec", "sudo", "sh", "chown", "udevadm"]
+
+[[plugin]]
+id           = "neoscaler/tibber"
+name         = "Tibber"
+version      = "1.0.0"
+author       = "neoscaler"
+license      = "MIT"
+icon         = "bolt"
+description  = "Tibber electricity prices (demo data) in the bar, a panel and a desktop widget, with the cheapest and most expensive time of the day."
+deprecated   = false
+plugin_api   = 43
+tags         = ["energy", "prices", "tibber", "demo"]
+dependencies = []
