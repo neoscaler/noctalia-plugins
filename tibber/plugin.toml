@@ -1,0 +1,101 @@
+id = "neoscaler/tibber"
+name = "Tibber"
+version = "1.0.0"
+plugin_api = 43
+author = "neoscaler"
+license = "MIT"
+icon = "bolt"
+description = "Tibber electricity prices (demo data) in the bar, a panel and a desktop widget, with the cheapest and most expensive time of the day."
+tags = ["energy", "prices", "tibber", "demo"]
+dependencies = []
+
+# How often the price service refetches from the Tibber API. Failed requests
+# are retried after 60 s regardless of this interval.
+[[setting]]
+key = "refresh_minutes"
+type = "select"
+label_key = "settings.refresh_minutes.label"
+description_key = "settings.refresh_minutes.description"
+default = "15"
+options = [
+  { value = "5", label_key = "settings.refresh_minutes.options.5" },
+  { value = "15", label_key = "settings.refresh_minutes.options.15" },
+  { value = "30", label_key = "settings.refresh_minutes.options.30" },
+  { value = "60", label_key = "settings.refresh_minutes.options.60" },
+]
+
+# "minor" shows minor units (ct/kWh for EUR, öre/kWh for SEK), "major" shows
+# the major unit (EUR/kWh, SEK/kWh).
+[[setting]]
+key = "price_unit"
+type = "select"
+label_key = "settings.price_unit.label"
+description_key = "settings.price_unit.description"
+default = "minor"
+options = [
+  { value = "minor", label_key = "settings.price_unit.options.minor" },
+  { value = "major", label_key = "settings.price_unit.options.major" },
+]
+
+[[setting]]
+key = "show_unit"
+type = "bool"
+label_key = "settings.show_unit.label"
+description_key = "settings.show_unit.description"
+default = true
+
+# Headless service: polls the Tibber demo API and publishes the parsed model
+# to noctalia.state for the bar widget, panel and desktop widget.
+[[service]]
+id = "prices"
+entry = "service.luau"
+
+# Bar widget: current price, colored by Tibber level. Click opens the panel.
+[[widget]]
+id = "bar"
+entry = "widget.luau"
+
+  [[widget.setting]]
+  key = "glyph"
+  type = "glyph"
+  label_key = "settings.glyph.label"
+  description_key = "settings.glyph.description"
+  default = "bolt"
+
+# Price panel: stat tiles (cheapest / most expensive of the day) and a bar
+# chart of today's (and, once published, tomorrow's) prices.
+# Opened from the bar widget, or: noctalia msg panel-toggle neoscaler/tibber:panel
+[[panel]]
+id = "panel"
+entry = "panel.luau"
+width = 560
+height = "content"
+max_height = 560
+placement = "attached"
+position = "auto"
+open_near_click = true
+
+# Desktop widget: compact current price, sparkline and min/max of the day.
+# Add it from the desktop-widgets editor (type "neoscaler/tibber:desktop").
+[[desktop_widget]]
+id = "desktop"
+entry = "desktop.luau"
+
+  [[desktop_widget.setting]]
+  key = "color"
+  type = "color"
+  label_key = "settings.color.label"
+  description_key = "settings.color.description"
+  default = "primary"
+
+  [[desktop_widget.setting]]
+  key = "show_chart"
+  type = "bool"
+  label_key = "settings.show_chart.label"
+  default = true
+
+  [[desktop_widget.setting]]
+  key = "show_minmax"
+  type = "bool"
+  label_key = "settings.show_minmax.label"
+  default = true
