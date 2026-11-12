@@ -24,6 +24,8 @@ jobs:
 
       - name: Luau analyze (luau-lsp)
         run: |
-          npm install -g luau-lsp
           curl -sL -o noctalia.d.luau https://raw.githubusercontent.com/noctalia-dev/official-plugins/main/noctalia.d.luau
-          luau-lsp analyze --definitions=noctalia.d.luau charge-mode tibber
+          curl -sL -o luau-lsp.zip https://github.com/JohnnyMorganz/luau-lsp/releases/latest/download/luau-lsp-linux-x86_64.zip
+          unzip -q -o luau-lsp.zip
+          chmod +x luau-lsp
+          ./luau-lsp analyze --definitions=noctalia.d.luau charge-mode tibber
